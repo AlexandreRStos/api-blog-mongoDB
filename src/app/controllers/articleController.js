@@ -35,12 +35,14 @@ router.get('/:articleId', async (req, res) => {
 router.use(authMiddleware)
 
 router.post('/create', async (req, res) => {
+  console.log(req.userId)
+
   try {
     const article = await Article.create({ ...req.body, author: req.userId })
 
     return res.send({ article })
   } catch (err) {
-    return res.status(400).send({ error: 'Error creating new project' })
+    return res.status(400).send({ error: 'Error creating new article' })
   }
 })
 
@@ -51,7 +53,7 @@ router.put('/:articleId', async (req, res) => {
 
     return res.send({ article })
   } catch (err) {
-    return res.status(400).send({ error: 'Error updating project' })
+    return res.status(400).send({ error: 'Error updating article' })
   }
 })
 
